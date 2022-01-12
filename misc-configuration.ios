@@ -1,0 +1,7 @@
+router eigrp 10
+	passive-interface default
+	no passive-interface gigabitEthernet 0/0
+	network x.x.x.x x.x.x.x
+
+interface gigabitEthernet 0/0
+	ip bandwidth-percent eigrp 10 20
