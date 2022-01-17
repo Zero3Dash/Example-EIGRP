@@ -1,3 +1,6 @@
+------------------------------------------------
+Basic Configuration
+------------------------------------------------
 router eigrp 10
 	passive-interface default
 	no passive-interface gigabitEthernet 0/0
@@ -5,3 +8,44 @@ router eigrp 10
 
 interface gigabitEthernet 0/0
 	ip bandwidth-percent eigrp 10 20
+
+------------------------------------------------
+EIGRP Authentication
+------------------------------------------------
+key chain KC_EIGRP
+ key 1
+  key-string cisco
+  cryptographic-algorithm md5
+
+interface GigabitEthernet0/0
+  ip authentication key-chain eigrp 10 KC_EIGRP
+  ip authentication mode eigrp 10 md5
+
+------------------------------------------------
+EIGRP Stub (redistritues summary & connect by default)
+------------------------------------------------
+router eigrp 10
+  eigrp stub
+
+------------------------------------------------
+EIGRP Stub (will not send updates to adjacent routers)
+------------------------------------------------
+router eigrp 10
+  eigrp stub receive-only
+
+------------------------------------------------
+EIGRP Auto-Summarization
+------------------------------------------------
+router eigrp 10
+  network x.x.x.x x.x.x.x
+  auto-summary
+
+------------------------------------------------
+EIGRP Manual-Summarization
+------------------------------------------------
+router eigrp 10
+  network x.x.x.x x.x.x.x
+
+interface gigabitEthernet0/0
+  ip summary-address eigrp 10 x.x.x.x x.x.x.x
+  
