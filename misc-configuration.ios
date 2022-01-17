@@ -48,4 +48,12 @@ router eigrp 10
 
 interface gigabitEthernet0/0
   ip summary-address eigrp 10 x.x.x.x x.x.x.x
-  
+
+------------------------------------------------
+EIGRP Redistribute in to OSPF
+------------------------------------------------
+router eigrp 10
+  redistribute ospf 1 metric 1000000 1 255 1 1500 route-map RM_TAG
+
+route-map RM_TAG permit 10
+ set tag [[tag]]
