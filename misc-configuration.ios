@@ -57,3 +57,27 @@ router eigrp 10
 
 route-map RM_TAG permit 10
  set tag [[tag]]
+
+------------------------------------------------
+EIGRP Modifying Administrative Distance
+------------------------------------------------
+router eigrp 10
+ distance eigrp 111 170
+
+------------------------------------------------
+EIGRP Route Filtering with Distribute List
+------------------------------------------------
+access-list 50 deny   50.50.50.50
+access-list 50 permit any
+
+router eigrp 10
+  distribute-list 50 out GigabitEthernet0/0
+
+------------------------------------------------
+EIGRP Advertise Default Static Route
+with Modified Default Metric
+------------------------------------------------
+router eigrp 10
+  redistribute static
+  default-metric 1000000 1 255 1 1500
+ 
